@@ -1,25 +1,9 @@
----
-title: "How to Deploy Multi-Container Applications in Docker: MySQL and Web App"
-description: "Step-by-step guide to deploying multi-container applications in Docker, setting up a MySQL database, and connecting it with a User Management WebApp for seamless interaction."
----
 
 # Deploy Multi-Container Applications in Docker: MySQL and User Management WebApp
 
 ---
 
-## Step 1: Introduction
-
-In this guide, we will deploy a multi-container application using Docker. The setup includes:
-
-1. Creating a **Docker Network**.
-2. Launching a **MySQL Database container**.
-3. Deploying a **User Management WebApp container** that connects to the MySQL database.
-4. Verifying the WebApp features, including user login, listing users, and creating new users.
-5. Cleaning up Docker resources.
-
----
-
-## Step 2: MySQL Database Container
+## MySQL Database Container
 
 We'll begin by setting up the MySQL container to manage the application's backend database.
 
@@ -31,13 +15,6 @@ docker network ls
 
 # Create a new Docker network for the multi-container application
 docker network create ums-app
-
-# List networks to verify the creation of the new network
-docker network ls
-
-# List any existing Docker containers
-docker ps
-docker ps -a
 
 # Create and run the MySQL container
 docker run -d \
@@ -69,12 +46,6 @@ docker volume ls
 
 # Connect to the MySQL container
 docker exec -it ums-mysqldb mysql -u root -pdbpassword11
-
-# MySQL commands to verify the database
-mysql> show schemas;
-mysql> use webappdb;
-mysql> show tables;
-mysql> exit;
 ```
 
 **Expected Output:**
@@ -90,7 +61,7 @@ docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' ums-
 
 ---
 
-## Step 3: Test the Importance of the `--network-alias` Flag
+## Test the Importance of the `--network-alias` Flag
 
 We'll test the DNS resolution within the Docker network to understand how the alias `mysql` works.
 
@@ -108,7 +79,7 @@ dig mysql
 
 ---
 
-## Step 4: User Management WebApp Container
+## User Management WebApp Container
 
 Now we'll set up the User Management WebApp container, which will connect to the MySQL container.
 
@@ -217,15 +188,7 @@ In this guide, you successfully deployed a multi-container application using Doc
 
 The ability to connect multiple containers via Docker networks allows for complex microservices architectures, making Docker an essential tool in application deployment.
 
----
 
-## Additional Notes
-
-- **Container Networking**: By using the `--network` flag and creating custom networks, containers can easily communicate using DNS names.
-- **Volume Management**: The use of Docker volumes ensures that the database data persists even if the container is stopped or removed.
-- **Container Clean-Up**: It's a good practice to remove unused containers, images, and volumes to free up resources and keep your Docker environment tidy.
-
----
 
 ## Additional Resources
 

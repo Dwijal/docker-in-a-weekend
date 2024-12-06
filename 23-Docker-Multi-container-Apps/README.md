@@ -163,23 +163,6 @@ mysql> select * from user;
 
 ---
 
-## Step 6: Clean-Up
-
-Once you're done with the deployment, clean up the Docker environment.
-
-```bash
-# Delete all running Docker containers
-docker rm -f $(docker ps -aq)
-
-# Delete all Docker images
-docker rmi $(docker images -q)
-
-# Delete Docker volumes (optional)
-docker volume rm ums-mysql-data 
-```
-
----
-
 ---
 
 ## Conclusion
